@@ -85,8 +85,6 @@ int target_x = 7,target_y = 15;
 int mode = 0;  // 0, reoresents idle state 
 
 int floodFlag = 0;
-// Function to set the brightness of the OLED display
-
 
 // Function to set motor direction and speed
 void setMotor(int motor, int dir, int pwmVal) {
@@ -200,15 +198,7 @@ int nextDirection(float x, float y, int currentDirection) {
   int threshold = 2;
   int x_cell = round(x/cellSize);
   int y_cell = round(y/cellSize);
-  // Create a smaller matrix to work with
-  // int trimmedMatrix[M][M];
 
-  // // Fill the smaller matrix by reading from the flood fill matrix, skipping walls
-  // for (int i = 0; i < M; i++) {
-  //   for (int j = 0; j < M; j++) {
-  //     trimmedMatrix[i][j] = floodFillMatrix[i * 2 + 1][j * 2 + 1];
-  //   }
-  // }
   // Store possible directions and their flood fill values
   int directions[4] = {1, 2, 3, 4}; // Up, Right, Down, Left
   int values[4] = {9999, 9999, 9999, 9999}; // Placeholder for flood fill values
@@ -287,10 +277,6 @@ void checkAndUpdateWalls(float irLeft, float irRight, float irFront) {
     
     if (irFront < wallThreshold) {
         Serial.println("maze updated");
-        // if (direction == 1 && currentCellX > 0) updateMaze(2 * currentCellX - 1, 2 * currentCellY, 1); // Up
-        // if (direction == 2 && currentCellY < N - 1) updateMaze(2 * currentCellX, 2 * currentCellY + 1, 1); // Right
-        // if (direction == 3 && currentCellX < N - 1) updateMaze(2 * currentCellX + 1, 2 * currentCellY, 1); // Down
-        // if (direction == 4 && currentCellY > 0) updateMaze(2 * currentCellX, 2 * currentCellY - 1, 1); // Left
         if(direction == 1) updateMaze(2*currentCellX + 1,2*currentCellY,1); //up
         if(direction == 2) updateMaze(2*currentCellX + 2,2*currentCellY+1,1); //right
         if(direction == 3) updateMaze(2*currentCellX + 1,2*currentCellY+2,1); //down
@@ -300,10 +286,6 @@ void checkAndUpdateWalls(float irLeft, float irRight, float irFront) {
 
     // Update the left wall
     if (irLeft < wallThreshold) {
-        // if (direction == 4 && currentCellY > 0) updateMaze(2 * currentCellX, 2 * currentCellY - 1, 1); // Left
-        // if (direction == 1 && currentCellX > 0) updateMaze(2 * currentCellX - 1, 2 * currentCellY, 1); // Up
-        // if (direction == 2 && currentCellY < N - 1) updateMaze(2 * currentCellX, 2 * currentCellY + 1, 1); // Right
-        // if (direction == 3 && currentCellX < N - 1) updateMaze(2 * currentCellX + 1, 2 * currentCellY, 1); // Down
         if(direction == 1) updateMaze(2*currentCellX,2*currentCellY + 1,1); //up
         if(direction == 2) updateMaze(2*currentCellX + 1,2*currentCellY,1); //right
         if(direction == 3) updateMaze(2*currentCellX + 2,2*currentCellY+1,1); //down
@@ -312,11 +294,6 @@ void checkAndUpdateWalls(float irLeft, float irRight, float irFront) {
 
     // Update the right wall
     if (irRight < wallThreshold) {
-        // if (direction == 2 && currentCellY < N - 1) updateMaze(2 * currentCellX, 2 * currentCellY + 1, 1); // Right
-        // if (direction == 3 && currentCellX < N - 1) updateMaze(2 * currentCellX + 1, 2 * currentCellY, 1); // Down
-        // if (direction == 4 && currentCellY > 0) updateMaze(2 * currentCellX, 2 * currentCellY - 1, 1); // Left
-        // if (direction == 1 && currentCellX > 0) updateMaze(2 * currentCellX - 1, 2 * currentCellY, 1); // Up
-
         if(direction == 1) updateMaze(2*currentCellX + 2,2*currentCellY+1,1); //up
         if(direction == 2) updateMaze(2*currentCellX+1,2*currentCellY+2,1); //right
         if(direction == 3) updateMaze(2*currentCellX,2*currentCellY+1,1); //down
@@ -455,32 +432,6 @@ void wallCorrectionAndAlignment(float irLeft, float irRight, float irFront) {
       targetPos[1] += alignmentThreshold;
   }
 }
-  // If a front wall is detected, correct the y_cm based on the wall position
-//   if (irFront < WallThreshold) {
-//     float expectedFrontWallPos;
-    
-//     // Determine the expected position of the front wall based on current direction
-//     if (currentDirection == 1) { // Facing up
-//   // Robot is aligned along the y-axis and moves up (positive y)
-//   expectedFrontWallPos = (round(y_cm / cellSize) * cellSize) - 9;
-//     y_cm = expectedFrontWallPos + irFront;  // Correct the y position
-    
-// } else if (currentDirection == 2) { // Facing right
-//   // Robot is aligned along the y-axis and moves down (negative y)
-//   expectedFrontWallPos = (round(x_cm / cellSize) * cellSize) - 9;
-//   x_cm = expectedFrontWallPos + irFront;
-  
-// } else if (currentDirection == 3) { // Facing down
-//   // Robot is aligned along the x-axis and moves right (positive x)
-//   expectedFrontWallPos = (round(y_cm / cellSize) * cellSize) + 9;
-//   y_cm = expectedFrontWallPos - irFront;
-// } else if (currentDirection == 4) { //left
-//   // Robot is aligned along the x-axis and moves left (negative x)
-//   expectedFrontWallPos = (round(x_cm / cellSize) * cellSize) + 9;
-//   x_cm = expectedFrontWallPos - irFront;
-// } 
-  
-//   }
 }
   
 void pidcontrol(){
@@ -593,20 +544,6 @@ void setup() {
 
   sei();
 
-  // runFloodFill(target_row,target_column);
-  // x_cm = 25;
-  // y_cm = 0;
-  // checkAndUpdateWalls(5,50,5);
-  // runFloodFill(target_row,target_column);
-  // int nextdirection = nextDirection(round(x_cm/cellSize),round(y_cm/cellSize),currentDirection);
-  // Serial.println(nextdirection);
-
-  // if(robotState != ROTATING) checkAndUpdateWalls(50,50,5);
-  // // runFloodFill(target_row,target_column);
-  // int nextdirection = nextDirection(round(x_cm/cellSize),round(y_cm/cellSize),currentDirection);
-  // Serial.println(nextdirection);
-  // runFloodFill(target_row,target_column);
-  // updateMotion(nextdirection);
 }
 int count = 0;
 void loop() {
@@ -652,54 +589,12 @@ void loop() {
   int irValue3 = analogRead(irPin3);
   float voltage3 = irValue3 * (5.0 / 1023.0);
   float distance3 = 27.86 * pow(voltage3, -1.15);
-  
-  // Serial.print("left:");
-  // Serial.print(distance1);
-  // Serial.print("front:");
-  // Serial.print(distance2);
-  // Serial.print("right:");
-  // Serial.println(distance3);
 
-
-
-  // Display IR values on 
   // Update motor control with PID
   unsigned long currentTime = millis();
   float deltaTime = (currentTime - prevTime) / 1000.0;
   prevTime = currentTime;
   
-  // for (int i = 0; i < NMOTORS; i++) {
-  //   long error = targetPos[i] - encoderPos[i];
-  //   integral[i] += error * deltaTime;
-  //   float derivative = (error - prevError[i]) / deltaTime;
-    
-  //   float output = kp * error + ki * integral[i] + kd * derivative;
-    
-  //   int power = constrain(abs(output), 0, 255);
-  //   int direction = (output >= 0) ? 1 : -1;
-    
-  //   setMotor(i, direction, power);
-    
-  //   prevError[i] = error;
-    
-  //   // Update target position
-
-  // }
-  
-  // Serial.print(encoderPos[0]);
-  // Serial.print(",");
-  // Serial.print(encoderPos[1]);
-  // Serial.print(":");
-  // Serial.print(targetPos[0]);
-  // Serial.print(",");
-  // Serial.print(targetPos[1]);
-  // Serial.print(x_cm);
-  // Serial.print(",");
-  // Serial.print(y_cm);
-  // Serial.print(",");
-
-
-
   if(currentTime-clock > 7000 && mode == 1){
     mode = 2;
   }
@@ -738,18 +633,8 @@ void loop() {
     if(round(x_cm/cellSize) == target_x && round(y_cm/cellSize) == target_y){
       mode = 0;
     }
-  }
-  // Serial.println(mode);
-  // wallCorrectionAndAlignment(distance3,distance1,distance2);
-  // Serial.println(y_cm);
-  delay(10);  // Adjust loop speed as needed
 
-  // Serial.print("left:");
-  // Serial.print(distance1);
-  // Serial.print("front:");
-  // Serial.print(distance2);
-  // Serial.print("right:");
-  // Serial.println(distance3);
+  delay(10);  // Adjust loop speed as needed
 
 }
 

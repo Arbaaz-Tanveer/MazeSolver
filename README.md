@@ -2,7 +2,7 @@
 
 This project was developed from scratch for the World Robotics Championship (WRC), where robots navigate through complex mazes autonomously. The robot uses advanced algorithms and precise hardware to efficiently solve and traverse mazes.
 
-![WRC Competition Image](.\images\Robot in maze.jpeg)
+![WRC Competition Image](./images/Robot%20in%20maze.jpeg)
 
 ## Table of Contents
 1. [Competition Overview](#competition-overview)
@@ -25,7 +25,7 @@ The robot's hardware was carefully selected to balance performance, reliability,
 - **Sensors**: Sharp IR sensors for wall detection
 - **Chassis**: Zero pcb board
 
-![Robot Hardware](.\images\Maze Solver.jpeg)
+![Robot Hardware](./images/Maze%20Solver.jpeg)
 
 ### Key Hardware Decisions:
 
