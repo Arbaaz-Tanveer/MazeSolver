@@ -84,7 +84,7 @@ To set up and run the project:
 
 ---
 
-We welcome contributions and suggestions to improve our WRC Maze Solver Robot. Feel free to open issues or submit pull requests!
+I welcome contributions and suggestions to improve Maze Solver Robot.
 
 
 
@@ -115,26 +115,3 @@ We welcome contributions and suggestions to improve our WRC Maze Solver Robot. F
 
 
 
-
-# WRC Maze Solver Robot
-
-This project was developed from scratch for the World Robotics Championship (WRC), where robots navigate through complex mazes autonomously. Our robot uses advanced algorithms and precise hardware to efficiently solve and traverse mazes.
-
-![WRC Competition Image](./images/wrc-competition-image.jpg)
-
-## Table of Contents
-[... content remains the same ...]
-
-## Competition Overview
-
-[... content remains the same ...]
-
-## Hardware
-
-Our robot's hardware was carefully selected to balance performance, reliability, and ease of implementation:
-
-[... content remains the same ...]
-
-![Robot Hardware](./images/robot-hardware-image.jpg)
-
-[... rest of the content remains the same ...]
